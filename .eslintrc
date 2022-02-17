@@ -29,10 +29,18 @@
     "linebreak-style": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "never",
+      "imports": "always-multiline",
+      "objects": "always-multiline"
+    }],
     "prettier/prettier": [
       "error",
       {
-        "endOfLine": "auto"
+        "endOfLine": "auto",
+        "trailingComma": "es5"
       }
     ],
     "import/extensions": [
