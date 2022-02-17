@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 
 export interface AuthState {
   accessToken: string | null;
-  setAccessToken: (accessToken: string) => unknown;
+  setAccessToken: (accessToken: string | null) => unknown;
 }
 
 export const useAuthStore = create<AuthState>(
@@ -11,10 +11,10 @@ export const useAuthStore = create<AuthState>(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (set, get) => ({
       accessToken: null,
-      setAccessToken: (accessToken) => set({ accessToken })
+      setAccessToken: (accessToken) => set({ accessToken }),
     }),
     {
-      name: 'auth-storage'
+      name: 'auth-storage',
     }
   )
 );
