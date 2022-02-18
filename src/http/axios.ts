@@ -1,7 +1,6 @@
-// import { clearLocalStorage, getAuthToken } from '@/util/localStorage.util';
 import axios from 'axios';
 import { API_BASE_URL } from '../config/app';
-import { useAuthStore } from '../store/auth.store';
+import { getToken, resetToken } from '../store/auth.store';
 
 const baseURL = API_BASE_URL;
 
@@ -13,7 +12,7 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use((config) => {
-  const { accessToken: token } = useAuthStore();
+  const token = getToken();
   if (token && config && config.headers) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -23,9 +22,10 @@ axiosInstance.interceptors.request.use((config) => {
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error?.response?.status === 401) {
-      useAuthStore().setAccessToken(null);
-      window.location.href = '/login';
+    const token = getToken();
+    if (!!token && error?.response?.status === 401) {
+      resetToken();
+      window.location.replace('/login');
     }
     return Promise.reject(error);
   }
