@@ -1,24 +1,27 @@
-import { Table,Button ,message,Popconfirm,Tag,Modal ,Space} from "antd";
-import { useState } from "react";
-import TodoForm from "./todoForm";
+import { Table,Button ,message,Popconfirm,Tag,Modal ,Form,Space,Select,Input} from "antd";
 import { useForm } from "antd/lib/form/Form";
+import { useState } from "react";
+import { CATEGORY } from "../../constants/CATEGORY/category";
 
 
 
-const TodoList = ({ todo,deleteTodo,editTodo}) =>{
 
+const TodoList = ({ todo,deleteTodo,editedData}) =>{
 
-    const editData = (data)=>{
-      
-        editTodo(data);
-    }
+    const form = useForm();
+    const editData= (data)=>{
+        console.log(data);
+        editedData(data);
+    };
+
 
     const deleteData=(id)=>{
         deleteTodo(id);
-        message.success("Todo deleted");
-    }
-    const columns = [
 
+        message.success("Todo deleted");
+    };
+
+    const columns = [
         {
             title:"Todo",
             dataIndex:"todo",
@@ -75,9 +78,7 @@ const TodoList = ({ todo,deleteTodo,editTodo}) =>{
                         key={todo.id}
                         >
                         <Button danger>Delete</Button>
-                        </Popconfirm> 
-                      
-
+                        </Popconfirm>
                     </Space>
                     </>
                 )
@@ -87,11 +88,12 @@ const TodoList = ({ todo,deleteTodo,editTodo}) =>{
  
     return (
         <>
+            <h2>Todos:</h2>
             <Table 
               dataSource={todo}
               columns={columns}
-              pagination={{ pageSize:3 }}
-           
+              pagination={{ pageSize:4}}
+              key={todo.id} 
             >
             </Table>
            

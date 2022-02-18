@@ -6,24 +6,50 @@ import TodoList from "./todoList";
 
 
 const Todo = ()=>{
-  
-    let todolist = localStorage.getItem("todo");
-    let todoss = JSON.parse(todolist);
 
   
-    const [todo,setTodo] = useState(todoss);
+    const [count,setCount] = useState(false);
+    const [todo,setTodo] = useState([]);
     const [edit,setEdit] = useState("");
-  
+     
+    useEffect(()=>{
+      
+      let todolist = localStorage.getItem("todo");
+      let todoss = JSON.parse(todolist);
+      setTodo(todoss);
+    },[count]);
 
-
-    const addTodo = (data)=>{
-      setTodo([...todo,data]);
-  
-    };
     useEffect(()=>{
       localStorage.setItem("todo", JSON.stringify(todo));
+    },[todo])
+
+    const addTodo = (data)=>{    
+      setTodo([...todo,data]);
+      setCount(!count);    
+    };
+
+    const editTodo = (data)=>{
+      console.log(data);
+      const newData = todo.findIndex((todo)=>{
+        return todo.id==data.id;
+    });
     
-    },[todo]);
+    todo[newData]=data;
+    setTodo(todo);
+    localStorage.setItem("todo", JSON.stringify(todo));
+    setCount(!count);
+    setEdit("");
+    console.log("completed");
+    }
+
+    const editedData=(data)=>{
+      console.log(data);
+      setEdit(data);
+    }
+    const cancelIt=()=>{
+      setEdit("");
+      setCount(!count);
+    }
 
     const deleteTodo = (id)=>{
       const updatedTodo = todo.filter((todo)=>{
@@ -32,62 +58,34 @@ const Todo = ()=>{
       setTodo(updatedTodo);
     };
 
-    const editTodo = (data)=>{
-   
-  
-      console.log(data);
-      setEdit(data);
-      
-    };
-
-    const editedData = (data)=>{
-      console.log(data);
-      const newData = todo.findIndex((todo)=>{
-        return todo.id==data.id;
-    });
-    
-    todo[newData]=data;
-    console.log(todo);
-    setTodo(todo);
-    console.log("completed");
-  
-  
-    }
-
-    const addData = ()=>{
-
-    }
-  
-  
-
     return(
         <>
-            <Divider/>
+          <Divider/>
+          <Divider/>
             <Row>
-                <Col span={12}>
-                  <TodoForm 
-                    addTodo={addTodo}
-                    editTodo={editTodo}
-                    editedData={editedData}
-                    edit={edit}
+          
+              <Col span={12}>
+                <TodoForm 
+                  addTodo={addTodo}
+                  edit={edit}
+                  editTodo={editTodo}
+                  cancelIt={cancelIt}   
+                />
+              </Col>
+             
+          
+              <Col span={10}>
+                <TodoList 
+                  todo={todo} 
+                  deleteTodo={deleteTodo}
+                  editTodo={editTodo}
+                  editedData={editedData}  
                   />
-
-                </Col>
-                <Col span={10}>
-                    <TodoList 
-                      todo={todo} 
-                      deleteTodo={deleteTodo}
-                      editTodo={editTodo}
-                    />
-                </Col>
-            </Row>
-            
+              </Col>
+            </Row>     
         </>
     )
 }
-
-
-
 
 
 export default Todo;

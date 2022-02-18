@@ -1,56 +1,66 @@
 
-import { Form ,Button,Input,message,Select } from "antd";
+import { Form ,Button,Input,message,Select,Space, Divider } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import { useEffect,useState } from "react";
+
 import { v4 as uuidv4 } from "uuid";
 import { CATEGORY } from "../../constants/CATEGORY/category";
 
-const TodoForm = ({ addTodo ,edit ,editedData})=>{
+const TodoForm = ({ addTodo ,edit,editTodo,cancelIt})=>{
 
     const { Option } = Select;
     const [form] = useForm();
-    console.log(edit);
-    
+
     if(edit){
         form.setFieldsValue({
-            todo: edit.todo,
-            status: edit.status,
+            todo:edit.todo,
             category:edit.category,
+            status:edit.status,
         })
     }
 
+    const cancelEdit = ()=>{
+        form.resetFields();
+        cancelIt();
+    }
+    message.config({
+        top:80,
+    });
 
     const submitTodo =(todo)=> {  
 
-                if(edit){
-                    const eData = {
-                        id:edit.id,
-                        todo:todo.todo,
-                        category:todo.category,
-                        status:todo.status,
+                    if(edit){
+                        const newData = {
+                            id:edit.id,
+                            todo:todo.todo,
+                            status:todo.status,
+                            category:todo.category,
+                        }
+                        console.log(newData);
+                        editTodo(newData);
+                        form.resetFields();
+                        message.success("Edited successfully");
                     }
-                editedData(eData);
-                form.resetFields();
-                
+                    else{
 
-                }
-                else{
-                    const todoData = {
-                        id: uuidv4(),
-                        todo:todo.todo,
-                        category:todo.category,
-                        status:todo.status,
-                    };
-                    addTodo(todoData);
-                    form.resetFields();
-                    message.success("Todo added");
-                    
-                }
-             
+                        const todoData = {
+                            id: uuidv4(),
+                            todo:todo.todo,
+                            category:todo.category,
+                            status:todo.status,
+                        };
+                        addTodo(todoData);
+                        console.log(todoData);
+                        form.resetFields();
+                        message.success("Todo added"); 
+                    }             
     }
  
     return(
-        <>
+        <>  
+            {
+                edit ? <h2>Edit Todo</h2> : <h2>Add Todo</h2>
+            }
+            <Divider/>
             <Form form={form}  onFinish={submitTodo}>
                 <Form.Item
                     name="todo"
@@ -111,8 +121,26 @@ const TodoForm = ({ addTodo ,edit ,editedData})=>{
                   labelCol={{ span:4}}
                   wrapperCol={{ span:11}}  
                 >
-                  <Button type="primary" htmlType="submit">Add Todo</Button>
+
+                 
+                    {
+                        edit ? 
+                        <Space>
+                            <Button type="primary" htmlType="submit">Edit Todo</Button>
+                            <Button danger onClick={cancelEdit}>Cancel</Button>
+
+                        </Space>
+                        
+                        :
+                        <Button type="primary" htmlType="submit">Add Todo</Button>
                 
+                
+                    }
+
+
+                
+                
+                  
 
                 </Form.Item>
                 
