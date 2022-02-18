@@ -22,8 +22,7 @@ axiosInstance.interceptors.request.use((config) => {
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    const token = getToken();
-    if (!!token && error?.response?.status === 401) {
+    if (location.pathname !== '/login' && error?.response?.status === 401) {
       resetToken();
       window.location.replace('/login');
     }
