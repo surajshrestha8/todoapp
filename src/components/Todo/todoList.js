@@ -1,23 +1,16 @@
-import { Table,Button ,message,Popconfirm,Tag,Modal ,Form,Space,Select,Input} from "antd";
-import { useForm } from "antd/lib/form/Form";
-import { useState } from "react";
-import { CATEGORY } from "../../constants/CATEGORY/category";
-
+import { Table,Button ,message,Popconfirm,Tag ,Space} from "antd";
 
 
 
 const TodoList = ({ todo,deleteTodo,editedData}) =>{
 
-    const form = useForm();
     const editData= (data)=>{
         console.log(data);
         editedData(data);
     };
 
-
     const deleteData=(id)=>{
         deleteTodo(id);
-
         message.success("Todo deleted");
     };
 
@@ -69,18 +62,19 @@ const TodoList = ({ todo,deleteTodo,editedData}) =>{
             key:"Actions",
             render(todo){
                 return(
-                    <> 
+                    <div key={todo.id}> 
+                    <li key={todo.id}></li>
                     <Space>
-                        <Button type="primary" onClick={()=>editData(todo)}>Edit</Button>
+                        <Button type="primary" key={todo.id} onClick={()=>editData(todo)}>Edit</Button>
                         <Popconfirm
                         title="Do you want to delete this todo?"
                         onConfirm={()=>deleteData(todo.id)}
                         key={todo.id}
                         >
-                        <Button danger>Delete</Button>
+                        <Button danger key={todo.id}>Delete</Button>
                         </Popconfirm>
                     </Space>
-                    </>
+                    </div>
                 )
             }
         }
@@ -93,11 +87,11 @@ const TodoList = ({ todo,deleteTodo,editedData}) =>{
               dataSource={todo}
               columns={columns}
               pagination={{ pageSize:4}}
-              key={todo.id} 
+              rowKey={todo.id}
+              key={todo.id}
+        
             >
             </Table>
-           
-        
         </>
     )
 }

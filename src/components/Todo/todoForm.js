@@ -28,31 +28,31 @@ const TodoForm = ({ addTodo ,edit,editTodo,cancelIt})=>{
 
     const submitTodo =(todo)=> {  
 
-                    if(edit){
-                        const newData = {
-                            id:edit.id,
-                            todo:todo.todo,
-                            status:todo.status,
-                            category:todo.category,
-                        }
-                        console.log(newData);
-                        editTodo(newData);
-                        form.resetFields();
-                        message.success("Edited successfully");
-                    }
-                    else{
-
-                        const todoData = {
-                            id: uuidv4(),
-                            todo:todo.todo,
-                            category:todo.category,
-                            status:todo.status,
-                        };
-                        addTodo(todoData);
-                        console.log(todoData);
-                        form.resetFields();
-                        message.success("Todo added"); 
-                    }             
+        if(edit){
+            const newData = {
+                id:edit.id,
+                todo:todo.todo,
+                status:todo.status,
+                category:todo.category,
+            }
+            console.log(newData);
+            editTodo(newData);
+            form.resetFields();
+            message.success("Edited successfully");
+        }
+                    
+        else{
+            const todoData = {
+                id: uuidv4(),
+                todo:todo.todo,
+                category:todo.category,
+                status:todo.status,
+                };
+            addTodo(todoData);
+            console.log(todoData);
+            form.resetFields();
+            message.success("Todo added"); 
+        }             
     }
  
     return(
@@ -121,27 +121,16 @@ const TodoForm = ({ addTodo ,edit,editTodo,cancelIt})=>{
                   labelCol={{ span:4}}
                   wrapperCol={{ span:11}}  
                 >
-
-                 
                     {
                         edit ? 
                         <Space>
                             <Button type="primary" htmlType="submit">Edit Todo</Button>
                             <Button danger onClick={cancelEdit}>Cancel</Button>
-
-                        </Space>
-                        
+                        </Space>  
                         :
                         <Button type="primary" htmlType="submit">Add Todo</Button>
                 
-                
                     }
-
-
-                
-                
-                  
-
                 </Form.Item>
                 
             </Form>
