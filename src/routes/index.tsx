@@ -1,11 +1,10 @@
-import { lazy } from 'react';
 import { Route, Routes as Wrapper } from 'react-router-dom';
 import Snackbar from '../components/elements/feedback/Snackbar';
 import AuthLayout from '../components/layout/AuthLayout';
 import GuestLayout from '../components/layout/GuestLayout';
 import { useNotificationStore } from '../store/app.store';
-const HomePage = lazy(() => import('../pages/home'));
-const LoginPage = lazy(() => import('../pages/auth/login'));
+import authRoutes from './auth.routes';
+import guestRoutes from './guest.routes';
 
 const Routes = () => {
   const { message, type } = useNotificationStore();
@@ -15,10 +14,14 @@ const Routes = () => {
       <Snackbar message={message || ''} type={type} />
       <Wrapper>
         <Route element={<GuestLayout />}>
-          <Route path="/login" element={<LoginPage />} />
+          {guestRoutes.map((route) => (
+            <Route key={route.id} path={route.path} element={route.element} />
+          ))}
         </Route>
         <Route element={<AuthLayout />}>
-          <Route path="/" element={<HomePage />} />
+          {authRoutes.map((route) => (
+            <Route key={route.id} path={route.path} element={route.element} />
+          ))}
         </Route>
       </Wrapper>
     </>
