@@ -6,11 +6,13 @@ const get = async (url: string, config?: AxiosRequestConfig) => {
   return data;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const post = async (url: string, requestData: any, config?: AxiosRequestConfig) => {
   const { data } = await axios.post(url, requestData, config);
   return data;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const put = async (url: string, requestData: any, config?: AxiosRequestConfig) => {
   const { data } = await axios.put(url, requestData, config);
   return data;
