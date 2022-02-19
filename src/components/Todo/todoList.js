@@ -87,8 +87,7 @@ const TodoList = ({ todo,deleteTodo,editedData}) =>{
               dataSource={todo}
               columns={columns}
               pagination={{ pageSize:4}}
-              rowKey={todo.id}
-              key={todo.id}
+            
         
             >
             </Table>
