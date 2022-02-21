@@ -41,7 +41,7 @@ console.log(weather);
                     :
                     <h2>Search City</h2>
                 }
-            
+
             <Row>
                 
                 <Col span={8}>
