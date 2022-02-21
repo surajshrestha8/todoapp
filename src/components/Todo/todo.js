@@ -31,7 +31,7 @@ const Todo = ()=>{
     const editTodo = (data)=>{
       console.log(data);
       const newData = todo.findIndex((todo)=>{
-        return todo.id==data.id;
+        return todo.id===data.id;
     });
     
     todo[newData]=data;
@@ -41,7 +41,7 @@ const Todo = ()=>{
     setEdit("");
     console.log("completed");
     }
-
+    
     const editedData=(data)=>{
       console.log(data);
       setEdit(data);
@@ -53,7 +53,7 @@ const Todo = ()=>{
 
     const deleteTodo = (id)=>{
       const updatedTodo = todo.filter((todo)=>{
-        return todo.id != id;
+        return todo.id !== id;
       });
       setTodo(updatedTodo);
     };
@@ -63,7 +63,6 @@ const Todo = ()=>{
           <Divider/>
           <Divider/>
             <Row>
-          
               <Col span={12}>
                 <TodoForm 
                   addTodo={addTodo}
@@ -72,8 +71,6 @@ const Todo = ()=>{
                   cancelIt={cancelIt}   
                 />
               </Col>
-             
-          
               <Col span={10}>
                 <TodoList 
                   todo={todo} 

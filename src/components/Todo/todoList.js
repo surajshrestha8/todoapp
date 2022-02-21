@@ -79,7 +79,6 @@ const TodoList = ({ todo,deleteTodo,editedData}) =>{
             }
         }
     ]
- 
     return (
         <>
             <h2>Todos:</h2>
@@ -87,8 +86,6 @@ const TodoList = ({ todo,deleteTodo,editedData}) =>{
               dataSource={todo}
               columns={columns}
               pagination={{ pageSize:4}}
-            
-        
             >
             </Table>
         </>

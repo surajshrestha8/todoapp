@@ -1,7 +1,5 @@
-
 import { Form ,Button,Input,message,Select,Space, Divider } from "antd";
 import { useForm } from "antd/lib/form/Form";
-
 import { v4 as uuidv4 } from "uuid";
 import { CATEGORY } from "../../constants/CATEGORY/category";
 
@@ -36,12 +34,15 @@ const TodoForm = ({ addTodo ,edit,editTodo,cancelIt})=>{
                 category:todo.category,
             }
             console.log(newData);
+            
             editTodo(newData);
             form.resetFields();
             message.success("Edited successfully");
         }
                     
-        else{
+        else
+
+        {
             
             const todoData = {
                 id: uuidv4(),
@@ -49,7 +50,9 @@ const TodoForm = ({ addTodo ,edit,editTodo,cancelIt})=>{
                 category:todo.category,
                 status:todo.status,
                 };
+
             addTodo(todoData);
+            console.log("Hello");
             console.log(todoData);
             form.resetFields();
             message.success("Todo added"); 
