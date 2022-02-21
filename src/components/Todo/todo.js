@@ -35,7 +35,6 @@ const Todo = ()=>{
       else{
         setTodo([data]);
       }
-       
     };
 
     const editTodo = (data)=>{
