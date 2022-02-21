@@ -13,7 +13,7 @@ export const drawerRoutes: Array<RouteItem> = [
     title: 'Dashboard',
   },
   {
-    id: 'posts-module',
+    id: 'post-module',
     path: '#',
     icon: <Article />,
     element: <></>,
