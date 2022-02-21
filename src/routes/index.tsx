@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { Route, Routes as Wrapper } from 'react-router-dom';
 import Snackbar from '../components/elements/feedback/Snackbar';
 import AuthLayout from '../components/layout/AuthLayout';
@@ -20,7 +21,12 @@ const Routes = () => {
         </Route>
         <Route element={<AuthLayout />}>
           {authRoutes.map((route) => (
-            <Route key={route.id} path={route.path} element={route.element} />
+            <Fragment key={route.id}>
+              {!route.children && <Route path={route.path} element={route.element} />}
+              {route.children?.map((child) => (
+                <Route key={`${route.id}-${child.id}`} path={child.path} element={child.element} />
+              ))}
+            </Fragment>
           ))}
         </Route>
       </Wrapper>
