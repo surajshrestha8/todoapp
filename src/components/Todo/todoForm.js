@@ -49,11 +49,12 @@ const TodoForm = ({ addTodo ,edit,editTodo,cancelIt})=>{
                 todo:todo.todo,
                 category:todo.category,
                 status:todo.status,
-                };
+            };
 
+          
             addTodo(todoData);
-            console.log("Hello");
-            console.log(todoData);
+         
+          ;
             form.resetFields();
             message.success("Todo added"); 
         }             

@@ -21,11 +21,21 @@ const Todo = ()=>{
 
     useEffect(()=>{
       localStorage.setItem("todo", JSON.stringify(todo));
+      console.log(todo);
     },[todo])
 
-    const addTodo = (data)=>{    
-      setTodo([...todo,data]);
-      setCount(!count);    
+
+    const addTodo = (data)=>{  
+      console.log(data);  
+   
+      if(todo){
+        setTodo([...todo,data]);
+        setCount(!count);  
+      }
+      else{
+        setTodo([data]);
+      }
+       
     };
 
     const editTodo = (data)=>{
