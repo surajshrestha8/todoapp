@@ -13,3 +13,10 @@ export interface RouteItem {
   title?: string;
   children?: Array<RouteItem>;
 }
+
+export interface MutationOptions {
+  onError?: (error: any) => Promise<unknown> | void;
+  onSuccess?: (data: any) => Promise<unknown> | void;
+  id?: string | number;
+  editing?: boolean;
+}
