@@ -1,8 +1,7 @@
-import { PaginationProps } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import http from '~/http';
-import { MutationOptions } from '~/interface/common.interface';
+import { MutationOptions, PaginationProps } from '~/interface/common.interface';
 import { formatPagination } from '~/utils/pagination.utils';
 
 export function useFetchList<M = unknown>(key: string[], endpoint: string, query?: any) {

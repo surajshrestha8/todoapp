@@ -20,3 +20,9 @@ export interface MutationOptions {
   id?: string | number;
   editing?: boolean;
 }
+
+export interface PaginationProps {
+  page: number;
+  perPage: number;
+  totalRecords: number;
+}
