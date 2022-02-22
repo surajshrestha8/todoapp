@@ -1,6 +1,7 @@
-import { SwipeableDrawer } from '@mui/material';
+import { Box, SwipeableDrawer } from '@mui/material';
 import React, { useState } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import Breadcrumb from '~/components/layout/Breadcrumb';
 import useAuth from '../../hooks/auth/auth.hooks';
 import DrawerList from './DrawerList';
 import Header from './Header';
@@ -38,7 +39,10 @@ const AuthLayout = () => {
       >
         <DrawerList onItemClick={toggleDrawer(false)} />
       </SwipeableDrawer>
-      <Outlet />
+      <Box p={2} minHeight="90vh">
+        <Breadcrumb />
+        <Outlet />
+      </Box>
     </>
   );
 };
