@@ -4,6 +4,7 @@ import { RouteItem } from '../interface/common.interface';
 const HomePage = lazy(() => import('../pages/home'));
 const SamplePage = lazy(() => import('../pages/sample'));
 const AdminsListingPage = lazy(() => import('~/pages/user-management/admin/admins'));
+const CreateAdminPage = lazy(() => import('~/pages/user-management/admin/create-admin'));
 
 export const drawerRoutes: Array<RouteItem> = [
   {
@@ -54,4 +55,13 @@ export const drawerRoutes: Array<RouteItem> = [
   },
 ];
 
-export default [...drawerRoutes];
+export const appRoutes: Array<RouteItem> = [
+  {
+    id: 'create-admin',
+    path: '/admin/create',
+    element: <CreateAdminPage />,
+    title: 'Create Admin',
+  },
+];
+
+export default [...drawerRoutes, ...appRoutes];
