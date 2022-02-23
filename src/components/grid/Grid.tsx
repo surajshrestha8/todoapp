@@ -1,8 +1,10 @@
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { DataGrid, DataGridProps, GridColumns, GridRowsProp } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 
-type Props = DataGridProps;
+interface Props extends DataGridProps {
+  onAddNew?: () => unknown;
+}
 
 const Grid = (props: Props) => {
   const { columns: propColumns, page, rows: data, pageSize } = props;
@@ -30,6 +32,13 @@ const Grid = (props: Props) => {
 
   return (
     <Box>
+      {props.onAddNew && (
+        <Box display="flex" justifyContent="flex-end" mb={2}>
+          <Button variant="contained" onClick={props.onAddNew}>
+            Add New
+          </Button>
+        </Box>
+      )}
       <DataGrid
         autoHeight
         columns={columns}
