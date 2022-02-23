@@ -26,3 +26,8 @@ export interface PaginationProps {
   perPage: number;
   totalRecords: number;
 }
+
+export interface SelectOption {
+  label: string;
+  value: string | number;
+}
