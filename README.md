@@ -83,4 +83,8 @@ Some images of the meet up app
 ### Favourites page
 ![favouritespage](https://github.com/surajshrestha8/todoapp/blob/meetupapp/screenshots/favouritemeetup.jpg?raw=true)
 
+The data is posted to and retrieved from Firebase , which provides cloud storage . It uses NOSQL database for the storage of data.Also considered as a large json file it acts as a real time database.
+
+### Post data to firebase
+![postdata]()
 

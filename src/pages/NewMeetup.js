@@ -1,21 +1,18 @@
 import { Navigate ,useNavigate } from "react-router-dom"
 import NewMeetupForm from "../components/meetups/NewMeetUpForm"
+import axios from "axios";
 
 const Newmeetup = () =>{
     const navigate = useNavigate();
     const onMeetup=(data)=>{
         console.log(data);
-        fetch("https://meetupproject-7c9ac-default-rtdb.firebaseio.com/meetup.json",
-        {
-            method:"POST",
-            body:JSON.stringify(data),
-            headers:{
-                "Content-Type":"application/json",
-            },
-
-        })
-        .then(()=>{
+        axios.post("https://meetupproject-7c9ac-default-rtdb.firebaseio.com/meetup.json",data)
+        .then(function(response){
+            console.log(response);
             navigate("/");
+        })
+        .catch(function(error){
+            console.log(error);
         })
     }
     return(
