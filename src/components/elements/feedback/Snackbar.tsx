@@ -4,13 +4,14 @@ import React, { useEffect, useState } from 'react';
 interface Props {
   message: string;
   type: AlertColor;
+  onClose?: () => unknown;
 }
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const Snackbar = ({ message, type }: Props) => {
+const Snackbar = ({ message, type, onClose }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -21,9 +22,9 @@ const Snackbar = ({ message, type }: Props) => {
     <DSnackbar
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={open}
-      onClose={() => setOpen(false)}
+      onClose={onClose}
     >
-      <Alert severity={type} sx={{ width: '100%' }} onClose={() => setOpen(false)}>
+      <Alert severity={type} sx={{ width: '100%' }} onClose={onClose}>
         {message}
       </Alert>
     </DSnackbar>

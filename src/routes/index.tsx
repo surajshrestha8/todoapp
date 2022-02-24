@@ -8,11 +8,11 @@ import authRoutes from './auth.routes';
 import guestRoutes from './guest.routes';
 
 const Routes = () => {
-  const { message, type } = useNotificationStore();
+  const { message, type, resetMessage } = useNotificationStore();
 
   return (
     <>
-      <Snackbar message={message || ''} type={type} />
+      <Snackbar message={message || ''} type={type} onClose={resetMessage} />
       <Wrapper>
         <Route element={<GuestLayout />}>
           {guestRoutes.map((route) => (
