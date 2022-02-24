@@ -23,12 +23,7 @@ const NewMeetupForm = (props)=>{
             image : enteredImage,
             description : enteredDescription,
         }
-
         props.onMeetup(meetupdata);
-      
-        
-
-
     }
     return(
         <>

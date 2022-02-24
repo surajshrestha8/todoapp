@@ -5,7 +5,7 @@ import axios from "axios";
 
 const Allmeetup = ()=>{
 
-    const [data,setData] = useState([]);
+  const [data,setData] = useState([]);
 
 
   useEffect(()=>{
@@ -45,7 +45,5 @@ const Allmeetup = ()=>{
         </>
     )
 }
-
-
 
 export default Allmeetup
