@@ -1,7 +1,9 @@
+import { Stack } from '@mui/material';
 import { GridColumns } from '@mui/x-data-grid';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DeleteButton from '~/components/action/DeleteButton';
+import EditButton from '~/components/action/EditButton';
 import Grid from '~/components/grid/Grid';
 import { useAdminUserList, useDeleteAdminUser } from '~/hooks/user/admin.hook';
 
@@ -33,10 +35,13 @@ const AdminsListingPage = () => {
         }
 
         return (
-          <DeleteButton
-            loading={isDeleting && deletingId === row.id}
-            onConfirm={() => handleConfirmDelete(row.id)}
-          />
+          <Stack spacing={2} direction="row">
+            <EditButton to={`/admin/${row.id}/edit`} />
+            <DeleteButton
+              loading={isDeleting && deletingId === row.id}
+              onConfirm={() => handleConfirmDelete(row.id)}
+            />
+          </Stack>
         );
       },
     },

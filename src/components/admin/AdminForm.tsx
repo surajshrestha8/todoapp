@@ -1,14 +1,33 @@
 import { SelectChangeEvent, TextField } from '@mui/material';
-import { ChangeEvent, SyntheticEvent, useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Form from '~/components/elements/form/Form';
 import Select from '~/components/elements/form/Select';
 import { useSaveAdminUser } from '~/hooks/user/admin.hook';
 import { useRoleOptions } from '~/hooks/user/role.hook';
+import { User } from '~/interface/auth.interface';
 
-const AdminForm = () => {
+interface Props {
+  admin?: User;
+  loading?: boolean;
+}
+
+const AdminForm = ({ admin, loading }: Props) => {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState<any>({});
-  const { items: roleOptions = [] } = useRoleOptions();
-  const { isLoading: saving, mutate } = useSaveAdminUser();
+  const { isLoading: loadingRoles, items: roleOptions = [] } = useRoleOptions();
+  const { isLoading: saving, mutate } = useSaveAdminUser({
+    id: admin?.id,
+  });
+
+  useEffect(() => {
+    if (!admin) {
+      return;
+    }
+
+    setForm(admin);
+  }, [admin]);
 
   const handleChange = ({
     target,
@@ -26,15 +45,24 @@ const AdminForm = () => {
     mutate(form);
   };
 
+  const handleCancel = () => {
+    navigate('/admin');
+  };
+
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form
+      onSubmit={handleSubmit}
+      onCancel={handleCancel}
+      loading={loading || loadingRoles}
+      saving={saving}
+    >
       <Select
         name="roleId"
         label="Role"
         options={roleOptions}
         required={true}
         onChange={handleChange}
-        value={form.roleId}
+        value={form.roleId || ''}
       />
 
       <TextField
@@ -51,8 +79,8 @@ const AdminForm = () => {
       <TextField
         id="lastName"
         name="lastName"
-        label="First Name"
-        placeholder="First Name"
+        label="Last Name"
+        placeholder="Last Name"
         fullWidth
         required
         onChange={handleChange}
@@ -71,29 +99,33 @@ const AdminForm = () => {
         value={form.email}
       />
 
-      <TextField
-        id="password"
-        name="password"
-        label="Password"
-        placeholder="Password"
-        type="password"
-        fullWidth
-        required
-        onChange={handleChange}
-        value={form.password}
-      />
+      {!admin && (
+        <TextField
+          id="password"
+          name="password"
+          label="Password"
+          placeholder="Password"
+          type="password"
+          fullWidth
+          required
+          onChange={handleChange}
+          value={form.password}
+        />
+      )}
 
-      <TextField
-        id="password_confirmation"
-        name="password_confirmation"
-        label="Confirm Password"
-        placeholder="Confirm Password"
-        type="password"
-        fullWidth
-        required
-        onChange={handleChange}
-        value={form.password_confirmation}
-      />
+      {!admin && (
+        <TextField
+          id="password_confirmation"
+          name="password_confirmation"
+          label="Confirm Password"
+          placeholder="Confirm Password"
+          type="password"
+          fullWidth
+          required
+          onChange={handleChange}
+          value={form.password_confirmation}
+        />
+      )}
     </Form>
   );
 };

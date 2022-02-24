@@ -5,6 +5,7 @@ const HomePage = lazy(() => import('../pages/home'));
 const SamplePage = lazy(() => import('../pages/sample'));
 const AdminsListingPage = lazy(() => import('~/pages/user-management/admin/admins'));
 const CreateAdminPage = lazy(() => import('~/pages/user-management/admin/create-admin'));
+const EditAdminPage = lazy(() => import('~/pages/user-management/admin/edit-admin'));
 
 export const drawerRoutes: Array<RouteItem> = [
   {
@@ -61,6 +62,12 @@ export const appRoutes: Array<RouteItem> = [
     path: '/admin/create',
     element: <CreateAdminPage />,
     title: 'Create Admin',
+  },
+  {
+    id: 'edit-admin',
+    path: '/admin/:id/edit',
+    element: <EditAdminPage />,
+    title: 'Edit Admin',
   },
 ];
 
