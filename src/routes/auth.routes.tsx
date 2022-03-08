@@ -1,4 +1,12 @@
-import { Article, Dashboard, ManageAccounts, Person, TableRows } from '@mui/icons-material';
+import {
+  Article,
+  Dashboard,
+  Google,
+  ManageAccounts,
+  Person,
+  TableRows,
+  Twitter,
+} from '@mui/icons-material';
 import { lazy } from 'react';
 import { RouteItem } from '../interface/common.interface';
 const HomePage = lazy(() => import('../pages/home'));
@@ -6,6 +14,15 @@ const SamplePage = lazy(() => import('../pages/sample'));
 const AdminsListingPage = lazy(() => import('~/pages/user-management/admin/admins'));
 const CreateAdminPage = lazy(() => import('~/pages/user-management/admin/create-admin'));
 const EditAdminPage = lazy(() => import('~/pages/user-management/admin/edit-admin'));
+const AdminPage = lazy(() => import('~/pages/users/admin/adminform'));
+const Admins = lazy(() => import('~/pages/users/admin/admins'));
+const EditAdmin = lazy(() => import('~/pages/users/admin/editadmin'));
+const CreateAdmin = lazy(() => import('~/pages/users/admin/create-admin'));
+const AdminList = lazy(() => import('~/pages/usersmanagement/admin/adminlist'));
+const CreateAdmins = lazy(() => import('~/pages/usersmanagement/admin/admin-create'));
+const EditNewAdmin = lazy(() => import('~/pages/usersmanagement/admin/editadmin'));
+const Roles = lazy(() => import('~/pages/roles/rolelist'));
+const CreateRole = lazy(() => import('~/pages/roles/create-roles'));
 
 export const drawerRoutes: Array<RouteItem> = [
   {
@@ -54,6 +71,69 @@ export const drawerRoutes: Array<RouteItem> = [
       },
     ],
   },
+  // {
+  //   id: 'newadmin-module',
+  //   path: '#',
+  //   title: 'newadmin',
+  //   element: <></>,
+  //   children: [
+  //     {
+  //       id: 'new-admin',
+  //       path: '/newadmin',
+  //       element: <Admins />,
+  //       title: 'Admin Page',
+  //     },
+  //     {
+  //       id: 'create-admin',
+  //       path: '/newadmin/create',
+  //       element: <CreateAdmin />,
+  //       title: 'Create Admin',
+  //     },
+  //   ],
+  // },
+  {
+    id: 'newadmins',
+    path: '#',
+    title: 'Users',
+    icon: <Person />,
+    element: <></>,
+    children: [
+      {
+        id: 'newadmins',
+        path: '/newadmins',
+        element: <AdminList />,
+        title: 'Admin List',
+      },
+    ],
+  },
+  {
+    id: 'role-module',
+    path: '#',
+    title: 'Roles',
+    element: <></>,
+    children: [
+      {
+        id: 'roles',
+        path: '/roles',
+        element: <Roles />,
+        title: 'Role list',
+      },
+    ],
+  },
+  {
+    id: 'twitter',
+    path: '#',
+    title: 'Twitter',
+    icon: <Twitter />,
+    element: <></>,
+  },
+  {
+    id: 'google',
+    path: '/www.google.com',
+    title: 'Google',
+    icon: <Google />,
+    element: <></>,
+  },
 ];
 
 export const appRoutes: Array<RouteItem> = [
@@ -68,6 +148,30 @@ export const appRoutes: Array<RouteItem> = [
     path: '/admin/:id/edit',
     element: <EditAdminPage />,
     title: 'Edit Admin',
+  },
+  {
+    id: 'edit-newadmin',
+    path: '/newadmin/:id/edit',
+    element: <EditAdmin />,
+    title: 'Edit Admin',
+  },
+  {
+    id: 'create-newadmins',
+    path: 'newadmins/create',
+    element: <CreateAdmins />,
+    title: 'Create new admin',
+  },
+  {
+    id: 'edit-newadmins',
+    path: '/newadmins/:id/edit',
+    element: <EditNewAdmin />,
+    title: 'Edit new admin',
+  },
+  {
+    id: 'create-role',
+    path: '/roles/create',
+    element: <CreateRole />,
+    title: 'Create Role',
   },
 ];
 

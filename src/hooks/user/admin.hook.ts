@@ -32,6 +32,21 @@ export const useSaveAdminUser = (options?: MutationOptions) => {
   });
 };
 
+export const useSaveAdmin = (options?: MutationOptions) => {
+  const navigate = useNavigate();
+  const endpoint = options?.id ? ADMIN_USER.SINGLE(options.id) : ADMIN_USER.BASE;
+  const onSuccess = () => {
+    queryClient.invalidateQueries(KEY);
+    navigate('/newadmins');
+  };
+
+  return useSaveRequest(endpoint, {
+    ...options,
+    editing: !!options?.id,
+    onSuccess: options?.onSuccess || onSuccess,
+  });
+};
+
 export const useDeleteAdminUser = (options?: MutationOptions) => {
   return useDeleteRequest(KEY, ADMIN_USER.SINGLE, options);
 };

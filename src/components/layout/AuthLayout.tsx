@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import Breadcrumb from '~/components/layout/Breadcrumb';
 import useAuth from '../../hooks/auth/auth.hooks';
+import Links from '../links/Links';
 import DrawerList from './DrawerList';
 import Header from './Header';
 
@@ -38,6 +39,7 @@ const AuthLayout = () => {
         onClose={toggleDrawer(false)}
       >
         <DrawerList onItemClick={toggleDrawer(false)} />
+        <Links />
       </SwipeableDrawer>
       <Box p={2} minHeight="90vh">
         <Breadcrumb />

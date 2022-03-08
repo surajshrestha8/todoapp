@@ -17,6 +17,7 @@ interface Props {
 }
 
 const Select = (props: Props) => {
+  console.log(props);
   return (
     <FormControl fullWidth>
       <InputLabel>{props.label}</InputLabel>

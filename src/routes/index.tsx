@@ -9,7 +9,6 @@ import guestRoutes from './guest.routes';
 
 const Routes = () => {
   const { message, type, resetMessage } = useNotificationStore();
-
   return (
     <>
       <Snackbar message={message || ''} type={type} onClose={resetMessage} />
