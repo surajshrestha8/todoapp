@@ -1,5 +1,6 @@
 import {
   Article,
+  BarChartSharp,
   Dashboard,
   Google,
   ManageAccounts,
@@ -23,6 +24,7 @@ const CreateAdmins = lazy(() => import('~/pages/usersmanagement/admin/admin-crea
 const EditNewAdmin = lazy(() => import('~/pages/usersmanagement/admin/editadmin'));
 const Roles = lazy(() => import('~/pages/roles/rolelist'));
 const CreateRole = lazy(() => import('~/pages/roles/create-roles'));
+const SparkLine = lazy(() => import('~/components/sparklines/spark'));
 
 export const drawerRoutes: Array<RouteItem> = [
   {
@@ -71,26 +73,6 @@ export const drawerRoutes: Array<RouteItem> = [
       },
     ],
   },
-  // {
-  //   id: 'newadmin-module',
-  //   path: '#',
-  //   title: 'newadmin',
-  //   element: <></>,
-  //   children: [
-  //     {
-  //       id: 'new-admin',
-  //       path: '/newadmin',
-  //       element: <Admins />,
-  //       title: 'Admin Page',
-  //     },
-  //     {
-  //       id: 'create-admin',
-  //       path: '/newadmin/create',
-  //       element: <CreateAdmin />,
-  //       title: 'Create Admin',
-  //     },
-  //   ],
-  // },
   {
     id: 'newadmins',
     path: '#',
@@ -133,6 +115,13 @@ export const drawerRoutes: Array<RouteItem> = [
     title: 'Google',
     icon: <Google />,
     element: <></>,
+  },
+  {
+    id: 'sparkline',
+    path: '/sparkline',
+    title: 'SparkLine',
+    icon: <BarChartSharp />,
+    element: <SparkLine />,
   },
 ];
 

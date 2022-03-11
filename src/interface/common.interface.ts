@@ -1,6 +1,5 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import React from 'react';
-import { Url } from 'url';
 
 export type HttpResponse = AxiosResponse;
 
@@ -12,6 +11,7 @@ export interface RouteItem {
   icon?: React.ReactNode;
   element: React.ReactNode;
   title?: string;
+  image?: string;
   link?: string;
   children?: Array<RouteItem>;
 }

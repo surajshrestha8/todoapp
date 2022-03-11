@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RouteItem } from '../../interface/common.interface';
 import { drawerRoutes } from '../../routes/auth.routes';
-import { newRoutes } from '../../routes/new.routes';
 
 interface Props {
   onItemClick: (event: React.MouseEvent | React.KeyboardEvent) => unknown;
@@ -47,7 +46,7 @@ const DrawerList = ({ onItemClick }: Props) => {
       component="nav"
       aria-labelledby="nav-sidebar"
     >
-      {newRoutes.map((route) => (
+      {drawerRoutes.map((route: RouteItem) => (
         <React.Fragment key={route.id}>
           <ListItemButton onClick={(e) => handleClick(e, route)}>
             <ListItemIcon>{route.icon}</ListItemIcon>
